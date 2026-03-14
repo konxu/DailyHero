@@ -1,5 +1,5 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="cover.png" />
+<img width="1200" alt="GHBanner" src="cover.png" />
 </div>
 
 # DailyHero - AI That Speaks When You Can't
