@@ -1,0 +1,9 @@
+{
+  "name": "DailyHero",
+  "description": "Real-time AI vision assistant specializing in emergency detection (like choking) and providing immediate, paced rescue guidance.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
