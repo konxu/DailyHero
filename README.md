@@ -39,7 +39,7 @@ After a car accident left me panicking alone in a foreign country, I realized: A
 
 ## 🔗 Links
 
-- [Watch the Demo Video]([your-youtube-link](https://youtu.be/mX9KOLdbk9o))
+- [Watch the Demo Video](https://youtu.be/mX9KOLdbk9o)
 - [View in AI Studio](https://ai.studio/apps/d7b0b806-b4ef-49b3-a0d4-02c2bc4bb2d1)
 - Gemini Live Agent Challenge Submission
 
