@@ -15,9 +15,8 @@ app.get("/api/health", (req, res) => {
   app.use(express.json());
 
   // API Route for Health Check
-  app.get("/api/health", (req, res) => {
-  res.send("Server is alive! Time: " + new Date().toISOString());
-});
+ app.get("/api/health", (req, res) => res.send("OK"));
+app.get("/api/config", (req, res) => res.json({ apiKey: process.env.GEMINI_API_KEY }));
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
@@ -43,11 +42,7 @@ app.get("/api/health", (req, res) => {
         res.status(500).send("前端文件未生成，请检查构建日志。");
       }
     });
-    app.get("/api/config", (req, res) => {
-  res.json({
-    apiKey: process.env.GEMINI_API_KEY
-  });
-});
+    
     
   }
 
