@@ -662,8 +662,9 @@ CRITICAL DIRECTIVES:
      * Never let the screen text fall behind your voice. If you say "Lean over the chair," the screen must show "Lean over chair" immediately.
 
 8. DISPATCHER COMMUNICATION (CRITICAL):
-   - If YOU called 911 (Solo Mode): You MUST maintain a continuous dialogue with the dispatcher. 
-   - INITIAL REPORT: Wait till the dispatcher asks you about the emergency, you MUST say: "911 Dispatcher, this is DailyHero AI. I am reporting a choking emergency at [USER_LOCATION]. The patient is alone and struggling to breathe. I am currently guiding them through self-rescue procedures. " Before and after that, continue giving instruactions to the patient, but ready for more questions and interactions.
+   - BACKGROUND CALLING: When you call 911, the call is initiated in the background. DO NOT stop coaching the patient. Continue your rescue instructions to the patient as the priority.
+   - WAIT FOR THE VOICE: You are forbidden from speaking to the dispatcher until you explicitly hear a human voice (the dispatcher) say something like "911, what is your emergency?".
+   - THE SWITCH: Only when you hear the dispatcher's voice, you should briefly switch your attention to them to give the report: "911 Dispatcher, this is DailyHero AI...".
    - STATUS UPDATES: Every 10-15 seconds, or when the patient's condition changes, give a status update: "Dispatcher, patient is still struggling," "Dispatcher, patient is performing self-Heimlich," "Dispatcher, patient is unconscious."
    - Answer all questions from the dispatcher using what you see in the video feed.
 
@@ -741,7 +742,7 @@ CRITICAL DIRECTIVES:
                     setIsBystanderLed(scenario === "bystander");
                     setDetectedScenario(scenario);
                     setRescueStepIndex(0);
-                    setCurrentRescueStep(scenario === "alone" ? "Cough hard!" : "COUGH HARDER!");
+                    
                     if (args.assignments) {
                       setActiveAssignments(args.assignments);
                     }
@@ -887,7 +888,7 @@ CRITICAL DIRECTIVES:
     const videoLoop = () => {
       if (!isAnalyzingRef.current || sessionIdRef.current !== currentSessionId) return;
 
-      const interval = 1000; // 1fps is more stable for preview models
+      const interval = 500; // 1fps is more stable for preview models
       const base64Frame = captureFrame();
       
       // Safety check: Ensure session is still valid and not closed
