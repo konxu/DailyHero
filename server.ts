@@ -43,6 +43,13 @@ app.get("/api/health", (req, res) => {
         res.status(500).send("前端文件未生成，请检查构建日志。");
       }
     });
+  }
+
+  app.listen(Number(PORT), "0.0.0.0", () => {
+    console.log(`服务器已在端口 ${PORT} 启动`);
+  });
 }
 
-startServer();
+startServer().catch(err => {
+  console.error("服务器启动失败:", err);
+});
