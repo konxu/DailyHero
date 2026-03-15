@@ -27,23 +27,34 @@ app.get("/api/config", (req, res) => res.json({ apiKey: process.env.GEMINI_API_K
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), "dist");
-    if (!fs.existsSync(distPath)) {
-      console.error("错误：找不到 dist 目录！请确保执行了 npm run build");
+    const path = await import("path");
+    const fs = await import("fs");
+    
+    // 使用 resolve 确保路径从根目录开始
+    const distPath = path.resolve("dist");
+    
+    // --- 调试日志：这能告诉我们 dist 到底在不在 ---
+    console.log("当前工作目录:", process.cwd());
+    console.log("尝试读取的 dist 路径:", distPath);
+    if (fs.existsSync(distPath)) {
+      console.log("dist 文件夹内容:", fs.readdirSync(distPath));
+    } else {
+      console.error("致命错误：dist 文件夹不存在！");
     }
+    // -------------------------------------------
 
+    // 1. 静态文件中间件（必须在通配符路由之前）
     app.use(express.static(distPath));
 
+    // 2. 通配符路由
     app.get("*", (req, res) => {
       const indexPath = path.join(distPath, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
-        res.status(500).send("前端文件未生成，请检查构建日志。");
+        res.status(500).send("服务器错误：找不到 index.html。请检查构建日志。");
       }
     });
-    
-    
   }
 
   app.listen(Number(PORT), "0.0.0.0", () => {
