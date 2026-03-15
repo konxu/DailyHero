@@ -15,8 +15,8 @@ app.listen(Number(PORT), "0.0.0.0", () => {
 
   // API Route for Health Check
   app.get("/api/health", (req, res) => {
-    res.json({ status: "ok" });
-  });
+  res.send("Server is alive! Time: " + new Date().toISOString());
+});
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
