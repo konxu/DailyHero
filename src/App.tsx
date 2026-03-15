@@ -656,6 +656,10 @@ CRITICAL DIRECTIVES:
      * If bystander is calling: Guide helper (or user) to do rescue steps.
      * If bystander is helping: Guide them through Back Blows and Heimlich thrusts.
    - If the user is ALONE, ABSOLUTELY FORBIDDEN: Do not suggest "Back Blows." 
+   - MANDATORY UI UPDATE RULE:
+     * Every time you give a new verbal instruction (e.g., moving from coughing to finding a chair), you MUST simultaneously call the show_rescue_step function.
+     * The screen_text parameter in that function MUST match your current verbal command.
+     * Never let the screen text fall behind your voice. If you say "Lean over the chair," the screen must show "Lean over chair" immediately.
 
 8. DISPATCHER COMMUNICATION (CRITICAL):
    - If YOU called 911 (Solo Mode): You MUST maintain a continuous dialogue with the dispatcher. 
@@ -737,7 +741,7 @@ CRITICAL DIRECTIVES:
                     setIsBystanderLed(scenario === "bystander");
                     setDetectedScenario(scenario);
                     setRescueStepIndex(0);
-                    setCurrentRescueStep(scenario === "alone" ? "Try to cough hard!" : "COUGH HARDER!");
+                    setCurrentRescueStep(scenario === "alone" ? "Cough hard!" : "COUGH HARDER!");
                     if (args.assignments) {
                       setActiveAssignments(args.assignments);
                     }
