@@ -43,6 +43,12 @@ app.get("/api/health", (req, res) => {
         res.status(500).send("前端文件未生成，请检查构建日志。");
       }
     });
+    app.get("/api/config", (req, res) => {
+  res.json({
+    apiKey: process.env.GEMINI_API_KEY
+  });
+});
+    
   }
 
   app.listen(Number(PORT), "0.0.0.0", () => {
