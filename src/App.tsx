@@ -516,8 +516,14 @@ export default function App() {
     setIsConnecting(true);
 
     try {
-      const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
-      const ai = new GoogleGenAI({ apiKey: apiKey || "" });
+      const response = await fetch("/api/config");
+  const config = await response.json();
+  const apiKey = config.apiKey;
+      if (!apiKey) {
+    throw new Error("服务器未配置 API Key");
+          }
+      const ai = new GoogleGenAI({ apiKey: apiKey });
+      
       
       const sessionPromise = ai.live.connect({
         model: "gemini-2.5-flash-native-audio-preview-09-2025",
@@ -850,7 +856,7 @@ CRITICAL DIRECTIVES:
         stopCamera("setup_failed");
       });
 
-    } catch (err) {
+    } catch (error) {
       console.error("Live API: [SETUP FAILED]", err);
       setIsConnecting(false);
     }
